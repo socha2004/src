@@ -12,6 +12,7 @@ define([
         entry: function () {
             // Garante DOM pronto
             $(initAccordion);
+            $(resolveBorda);
         },
         exit: function () {
             // Ao sair do mobile, remove estados e estilos inline
@@ -34,6 +35,8 @@ define([
             var $block = $(this);
             var $title = $block.find('h4').first();
             var $list = $title.next('ul');
+            // $list.addClass("borda-titulo");
+            $title.addClass("borda-titulo"); 
 
             if (!$list.length) {
                 console.log("footer-accordion: bloco sem <ul> logo após o <h4>");
@@ -42,13 +45,17 @@ define([
 
             // Estado inicial: fechado
             $block.removeClass('is-open');
+            $block.addClass('is-closed');
             $list.hide();
 
             // Evitar duplicar eventos
             $title
-                .off('click.footerAccordion')
+                .off('click.footerAccordion', function () {
+                    resolveBorda();
+                })
                 .on('click.footerAccordion', function () {
-
+                    $title.removeClass("borda-titulo");
+                    $list.addClass("borda-titulo");
                     // Se quiser só um aberto por vez, descomente:
                     $accordions.not($block).removeClass('is-open').find('ul').slideUp();
 
@@ -56,5 +63,11 @@ define([
                     $list.slideToggle(200);
                 });
         });
+    }
+
+    function resolveBorda() {
+        $('.is-closed')
+        .find('h4')
+        .addClass('borda-titulo')
     }
 });

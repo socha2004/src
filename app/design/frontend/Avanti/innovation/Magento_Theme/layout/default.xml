@@ -65,6 +65,11 @@
                         <argument name="block_id" xsi:type="string">footer_row_1</argument>
                     </arguments>
                 </block>     
+
+                <!-- linha 2: Flags Cards -->
+
+                <block class="Magento\Framework\View\Element\Template" name="flag.cards" template="Magento_Theme::html/flags-cards.phtml" after="-" />
+
             </container>
         </referenceContainer>
 
