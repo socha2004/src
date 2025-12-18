@@ -70,6 +70,9 @@
 
                 <block class="Magento\Framework\View\Element\Template" name="flag.cards" template="Magento_Theme::html/flags-cards.phtml" after="-" />
 
+                <!-- linha 3: Stamps Partners -->
+
+                <block class="Magento\Framework\View\Element\Template" name="stamps.partners" template="Magento_Theme::html/stamps-partners.phtml" after="flag.cards" />
             </container>
         </referenceContainer>
 

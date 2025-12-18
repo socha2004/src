@@ -10,14 +10,15 @@ define([
     mediaCheck({
         media: '(max-width: 767px)',
         entry: function () {
-            // Garante DOM pronto
-            $(initAccordion);
-            $(resolveBorda);
+            $(function () {
+                applyFooterAccordionClass();
+                initAccordion();
+                resolveBorda();
+            });
         },
         exit: function () {
-            // Ao sair do mobile, remove estados e estilos inline
             $('.footer-accordion')
-                .removeClass('is-open')
+                .removeClass('is-open is-closed')
                 .find('ul')
                 .attr('style', '');
         }
@@ -36,7 +37,7 @@ define([
             var $title = $block.find('h4').first();
             var $list = $title.next('ul');
             // $list.addClass("borda-titulo");
-            $title.addClass("borda-titulo"); 
+            $title.addClass("borda-titulo");
 
             if (!$list.length) {
                 console.log("footer-accordion: bloco sem <ul> logo após o <h4>");
@@ -67,7 +68,19 @@ define([
 
     function resolveBorda() {
         $('.is-closed')
-        .find('h4')
-        .addClass('borda-titulo')
+            .find('h4')
+            .addClass('borda-titulo')
+    }
+
+    function applyFooterAccordionClass() {
+        $('ul').each(function () {
+            var $ul = $(this);
+            var $parent = $ul.parent();
+
+            // Evita aplicar em elementos errados
+            if ($parent.find('div').length && !$parent.hasClass('footer-accordion')) {
+                $parent.addClass('footer-accordion');
+            }
+        });
     }
 });
